@@ -1,16 +1,17 @@
 import React from 'react';
 import { Text, View, TouchableOpacity, StyleSheet, TextInput, Image } from 'react-native';
 import { Header } from 'react-native-elements';
-import db from '../config'
+import db from '../config';
 import * as firebase from "firebase";
+import {SafeAreaProvider} from 'react-native-safe-area-context';
 
 export default class TransactionScreen extends React.Component {
     constructor(){
         super();
         this.state = {
-            title: '',
-            author: '',
-            story: '',
+            title: "",
+            author: "",
+            story: "",
         }
     }
 
@@ -20,6 +21,7 @@ export default class TransactionScreen extends React.Component {
             author: this.state.author,
             story: this.state.story,
         })
+        
         this.setState({
             title: "",
             author: "",
@@ -29,6 +31,7 @@ export default class TransactionScreen extends React.Component {
 
     render() {
         return(
+          <SafeAreaProvider>
             <View>
             <View style={styles.textContainer}>
           <Header
@@ -76,6 +79,7 @@ export default class TransactionScreen extends React.Component {
                     <Text>Submit</Text>
                 </TouchableOpacity>
         </View>
+        </SafeAreaProvider>
         )
     }
   }
