@@ -1,5 +1,13 @@
 import React from 'react';
-import { Text, View, TouchableOpacity, StyleSheet, TextInput, Image } from 'react-native';
+import { Text, 
+         View, 
+         TouchableOpacity, 
+         StyleSheet, 
+         TextInput,
+         KeyboardAvoidingView,
+         ToastAndroid,
+         Alert,
+         } from 'react-native';
 import { Header } from 'react-native-elements';
 import db from '../config';
 import * as firebase from "firebase";
@@ -21,17 +29,18 @@ export default class TransactionScreen extends React.Component {
             author: this.state.author,
             story: this.state.story,
         })
-        
+        ToastAndroid.show("Your Story Has Been Submitted.", ToastAndroid.SHORT);
         this.setState({
             title: "",
             author: "",
-            story: ""
+            story: "",
         })
     }
 
     render() {
         return(
           <SafeAreaProvider>
+            <KeyboardAvoidingView behavior="padding" style={styles.container}>
             <View>
             <View style={styles.textContainer}>
           <Header
@@ -79,6 +88,7 @@ export default class TransactionScreen extends React.Component {
                     <Text>Submit</Text>
                 </TouchableOpacity>
         </View>
+        </KeyboardAvoidingView>
         </SafeAreaProvider>
         )
     }
