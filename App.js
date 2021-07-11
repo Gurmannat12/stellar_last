@@ -1,55 +1,28 @@
-import React from "react";
-import { StyleSheet, Text, View, Image } from "react-native";
-import { createAppContainer } from "react-navigation";
-import { createBottomTabNavigator } from "react-navigation-tabs";
+import * as React from 'react';
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
+import DailyPicScreen from './screens/DailyPic';
+import SpaceCraftScreen from './screens/SpaceCraft';
+import StarMapScreen from './screens/StarMap';
+import HomeScreen from './screens/Home';
 
-import WriteStoryScreen from "./screens/WriteStoryScreen";
-import ReadStoryScreen from "./screens/ReadStoryScreen";
+const Stack = createStackNavigator();
 
-export default class App extends React.Component {
-  render() {
-    return <AppContainer />;
-  }
+function App(){
+  return (
+    <NavigationContainer>
+      <Stack.Navigator initialRouteName= "Home" screenOptions= {{
+        headerShown: false
+      }}>
+        <Stack.Screen name = "Home" component= {HomeScreen} />
+        <Stack.Screen name = "SpaceCraft" component= {SpaceCraftScreen} />
+        <Stack.Screen name = "DailyPic" component= {DailyPicScreen} />
+        <Stack.Screen name = "StarMap" component= {StarMapScreen} />
+
+      </Stack.Navigator>
+    </NavigationContainer>
+  )
 }
 
-const TabNavigator = createBottomTabNavigator({
-  WriteStory: { screen: WriteStoryScreen },
-  ReadStory: { screen: ReadStoryScreen }
-},
-{
-defaultNavigationOptions: ({navigation})=>({
-  tabBarIcon: ()=>{
-    const routeName = navigation.state.routeName;
-    console.log(routeName)
-    if(routeName === "WriteStory"){
-      return(
-        <Image
-        source={require("./assets/write.png")}
-        style={{width:40, height:40}}
-      />
-      )
-      
-    }
-    else if(routeName === "ReadStory"){
-      return(
-        <Image
-        source={require("./assets/read.png")}
-        style={{width:40, height:40}}
-      />)
-      
-        }
-      }
-    })
-  }
-  );
+export default App();
 
-const AppContainer = createAppContainer(TabNavigator);
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "red",
-    alignItems: "center",
-    justifyContent: "center"
-  }
-});
